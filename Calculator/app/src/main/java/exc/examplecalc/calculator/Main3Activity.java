@@ -316,13 +316,6 @@ public class Main3Activity extends AppCompatActivity {
                 int len = edtResult.getText().toString().trim().length();
                 if (len > 0) {
                     lastSymbol = String.valueOf(edtResult.getText().toString().trim().charAt(len - 1));
-                    if (lastSymbol.equals("(")) {
-                        countOpenBracket--;
-                    }
-                    if (lastSymbol.equals(")")) {
-                        countClosedBracket--;
-                    }
-
                     text = text.substring(0, text.length() - 1);
                     edtResult.setText(text);
                     edtResult.setSelection(text.length());
@@ -333,8 +326,6 @@ public class Main3Activity extends AppCompatActivity {
         });
 
     }
-
-
 
 
     public void checkLastSymbol(String buttonName) {
@@ -479,7 +470,7 @@ public class Main3Activity extends AppCompatActivity {
 
 
     public String calculateOnlyMultipyAndDivide(String text) {
-        boolean checkNeqative=false;
+        boolean checkNeqative = false;
         String resultCheck = "";
         Log.e("calledMethod", "check");
         String op;
@@ -512,38 +503,31 @@ public class Main3Activity extends AppCompatActivity {
         }
         Log.e("checkResult-", String.valueOf(res));
         resultCheck = String.valueOf(res);
-        checkNeqative=checkNeqative(text);
+        checkNeqative = checkNeqative(text);
         Log.e("checkNeqative-", String.valueOf(checkNeqative));
-        Log.e("cheText-",text);
+        Log.e("cheText-", text);
 
-            if(!text.contains("+") ) {
-                if(!text.contains("-")) {
-                    edtResult.append(resultCheck);
-                }else
-                    if(checkNeqative){
-                        Log.e("checkResultText-", text);
-                        boolean chek=checkNeqative(text);
-                        Log.e("chek", String.valueOf(checkNeqative));
-                        edtResult.append(resultCheck);
-                    }
-
-
-
-
+        if (!text.contains("+")) {
+            if (!text.contains("-")) {
+                edtResult.append(resultCheck);
+            } else if (checkNeqative) {
+                Log.e("checkResultText-", text);
+                boolean chek = checkNeqative(text);
+                Log.e("chek", String.valueOf(checkNeqative));
+                edtResult.append(resultCheck);
             }
 
 
-
-
+        }
 
 
         return resultCheck;
 
     }
 
-    public boolean checkNeqative(String text){
+    public boolean checkNeqative(String text) {
         // simvolun menfi (-) yaxud cixma isaresi oldugunu yoxlayir
-        boolean checkNeqative=false;
+        boolean checkNeqative = false;
         if (text.contains("-")) {
             int index = text.indexOf("-");
             if (String.valueOf(text.charAt(index - 1)).equals("(")) {
