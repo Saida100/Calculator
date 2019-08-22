@@ -1,4 +1,4 @@
-package exc.examplecalc.calculator;
+package com.saida_aliyeva.calculator;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package exc.examplecalc.calculator;
+package com.saida_aliyeva.calculator;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,9 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
-import com.example.contactswhatsapp.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,11 +15,12 @@ import java.util.regex.Pattern;
 
 public class Main3Activity extends AppCompatActivity {
 
-    Button btnClear, btnDivide, btnMultiPy, btnBackSpace,
-            btnMinus, btnPlus, btnPoint,
-            btnPlus_Minus, btnEqual,
-            btnSeven, btnEight, btnNine, btnFour, btnFive, btnSix, btnOne, btnTwo, btnThree, btnZero;
-    EditText edtResult;
+    Button clearButton, divideButton, multipyButton, backSpaceButton,
+            minusButton, plusButton, pointButton,
+            plus_minusButton, equalButton,
+            sevenButton, eightButton, nineButton, fourButton, fiveButton,
+            sixButton, oneButton, twoButton, threeButton, zeroButton;
+    EditText resultEditText;
     String[] arrayOperationSymbol = {"+", "-", "*", ":"};
     List<String> splitList = new ArrayList<>();
     int countOpenBracket = 0;
@@ -37,104 +36,75 @@ public class Main3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        edtResult = findViewById(R.id.result);
-        btnClear = findViewById(R.id.clear);
-        btnBackSpace = findViewById(R.id.backSpace);
-        btnDivide = findViewById(R.id.divide);
-        btnMultiPy = findViewById(R.id.multipy);
-        btnMinus = findViewById(R.id.minus);
-        btnPlus = findViewById(R.id.plus);
-        btnPoint = findViewById(R.id.point);
-        btnPlus_Minus = findViewById(R.id.plus_minus);
-        btnEqual = findViewById(R.id.equal);
-        btnSeven = findViewById(R.id.seven);
-        btnEight = findViewById(R.id.eight);
-        btnNine = findViewById(R.id.nine);
-        btnFour = findViewById(R.id.four);
-        btnFive = findViewById(R.id.five);
-        btnSix = findViewById(R.id.six);
-        btnThree = findViewById(R.id.three);
-        btnTwo = findViewById(R.id.two);
-        btnOne = findViewById(R.id.one);
-        btnZero = findViewById(R.id.zero);
-
-
-        btnOne.setOnClickListener(new View.OnClickListener() {
+        initViews();
+        oneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appendButtonName(btnOne.getText().toString());
+                appendButtonName(oneButton.getText().toString());
+            }
+        });
+        twoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appendButtonName(twoButton.getText().toString());
+
+            }
+        });
+        threeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appendButtonName(threeButton.getText().toString());
+            }
+        });
+        fourButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appendButtonName(fourButton.getText().toString());
 
 
             }
         });
-        btnTwo.setOnClickListener(new View.OnClickListener() {
+        fiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appendButtonName(btnTwo.getText().toString());
+                appendButtonName(fiveButton.getText().toString());
+            }
+        });
+        sixButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appendButtonName(sixButton.getText().toString());
 
             }
         });
-        btnThree.setOnClickListener(new View.OnClickListener() {
+        sevenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appendButtonName(btnThree.getText().toString());
-            }
-        });
-        btnFour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                appendButtonName(btnFour.getText().toString());
-
+                appendButtonName(sevenButton.getText().toString());
 
             }
         });
-        btnFive.setOnClickListener(new View.OnClickListener() {
+        eightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appendButtonName(btnFive.getText().toString());
-
-
-            }
-        });
-        btnSix.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                appendButtonName(btnSix.getText().toString());
-
-
-            }
-        });
-        btnSeven.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                appendButtonName(btnSeven.getText().toString());
-
-
-            }
-        });
-        btnEight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                appendButtonName(btnEight.getText().toString());
+                appendButtonName(eightButton.getText().toString());
 
             }
         });
 
-        btnNine.setOnClickListener(new View.OnClickListener() {
+        nineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appendButtonName(btnNine.getText().toString());
-
-
+                appendButtonName(nineButton.getText().toString());
             }
         });
 
 
-        btnZero.setOnClickListener(new View.OnClickListener() {
+        zeroButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String inputText = edtResult.getText().toString().trim();
-                String buttonName = btnZero.getText().toString();
+                String inputText = resultEditText.getText().toString().trim();
+                String buttonName = zeroButton.getText().toString();
                 checkPlus_Minus = true;
                 int len = inputText.length();
                 if (!inputText.contains("=") && (!inputText.endsWith("+0") &&
@@ -143,34 +113,34 @@ public class Main3Activity extends AppCompatActivity {
                         !inputText.endsWith(":0"))
                         && (!inputText.equals("0"))
                 ) {
-                    edtResult.append("0");
+                    resultEditText.append("0");
 
                 }
 
             }
         });
-        btnClear.setOnClickListener(new View.OnClickListener() {
+        clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edtResult.setText("");
+                resultEditText.setText("");
                 countOpenBracket = 0;
                 countClosedBracket = 0;
                 checkPlus_Minus = true;
 
             }
         });
-        btnPlus.setOnClickListener(new View.OnClickListener() {
+        plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkLastSymbol(btnPlus.getText().toString());
+                checkLastSymbol(plusButton.getText().toString());
                 checkPlus_Minus = true;
             }
         });
 
-        btnPlus_Minus.setOnClickListener(new View.OnClickListener() {
+        plus_minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String inputText = edtResult.getText().toString().trim();
+                String inputText = resultEditText.getText().toString().trim();
                 String leftBracket = "(-";
                 String rightBracket = ")";
                 String result = "";
@@ -187,7 +157,7 @@ public class Main3Activity extends AppCompatActivity {
                             if (!inputText.endsWith(".") && !inputText.equals("0") && !inputText.startsWith("(")
                                     && !inputText.endsWith(")")) {
                                 inputText = leftBracket.concat(inputText).concat(rightBracket);
-                                edtResult.setText(inputText);
+                                resultEditText.setText(inputText);
                                 checkPlus_Minus = false;
 
                             }
@@ -209,7 +179,7 @@ public class Main3Activity extends AppCompatActivity {
                                         && !inputText.substring(lenSubtract - 2, lenSubtract).equals("(-")
                                 ) {
                                     inputText = String.valueOf(sbInputText.replace(lenSubtract, len, reverseText));
-                                    edtResult.setText(inputText);
+                                    resultEditText.setText(inputText);
                                 }
                                 checkPlus_Minus = false;
 
@@ -219,8 +189,8 @@ public class Main3Activity extends AppCompatActivity {
                         }
                     } else {
                         inputText = inputText.replace(inputText, inputText.substring(0, inputText.length() - 1));
-                        edtResult.setText(inputText);
-                        inputText = edtResult.getText().toString().trim();
+                        resultEditText.setText(inputText);
+                        inputText = resultEditText.getText().toString().trim();
                         len = inputText.length();
                         result = reverseAndSet(inputText);
                         StringBuilder inversedText = new StringBuilder(result);
@@ -230,7 +200,7 @@ public class Main3Activity extends AppCompatActivity {
                         lenSubtract = len - lenReverseText;
                         sbInputText.append(inputText);
                         inputText = String.valueOf(sbInputText.replace(lenSubtract - 2, len, reverseText));
-                        edtResult.setText(inputText);
+                        resultEditText.setText(inputText);
                         checkPlus_Minus = true;
                     }
 
@@ -240,35 +210,35 @@ public class Main3Activity extends AppCompatActivity {
         });
 
 
-        btnMinus.setOnClickListener(new View.OnClickListener() {
+        minusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkLastSymbol(btnMinus.getText().toString());
+                checkLastSymbol(minusButton.getText().toString());
                 checkPlus_Minus = true;
 
             }
         });
-        btnMultiPy.setOnClickListener(new View.OnClickListener() {
+        multipyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkLastSymbol(btnMultiPy.getText().toString());
+                checkLastSymbol(multipyButton.getText().toString());
                 checkPlus_Minus = true;
 
             }
         });
-        btnDivide.setOnClickListener(new View.OnClickListener() {
+        divideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkLastSymbol(btnDivide.getText().toString());
+                checkLastSymbol(divideButton.getText().toString());
 
                 checkPlus_Minus = true;
 
             }
         });
-        btnPoint.setOnClickListener(new View.OnClickListener() {
+        pointButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getText = edtResult.getText().toString();
+                String getText = resultEditText.getText().toString();
                 int len = getText.length();
                 if (len > 0) {
                     makeArray(getText);
@@ -280,7 +250,7 @@ public class Main3Activity extends AppCompatActivity {
                             && !String.valueOf(getText.charAt(len - 1)).equals("(")
                             && !String.valueOf(getText.charAt(len - 1)).equals(")")
                             && !String.valueOf(getText.charAt(len - 1)).equals("=")) {
-                        edtResult.append(btnPoint.getText().toString());
+                        resultEditText.append(pointButton.getText().toString());
 
 
                     }
@@ -290,15 +260,15 @@ public class Main3Activity extends AppCompatActivity {
 
 
         });
-        btnEqual.setOnClickListener(new View.OnClickListener() {
+        equalButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 countBtnEqual = 1;
-                String text = edtResult.getText().toString().trim();
+                String text = resultEditText.getText().toString().trim();
                 int len = text.length();
-                checkLastSymbol(btnEqual.getText().toString());
-                len = edtResult.getText().toString().trim().length();
-                if (String.valueOf(edtResult.getText().toString().trim().charAt(len - 1)).equals("=")) {
+                checkLastSymbol(equalButton.getText().toString());
+                len = resultEditText.getText().toString().trim().length();
+                if (String.valueOf(resultEditText.getText().toString().trim().charAt(len - 1)).equals("=")) {
                     splitText(text);
                 }
 
@@ -307,18 +277,18 @@ public class Main3Activity extends AppCompatActivity {
 
 
         });
-        btnBackSpace.setOnClickListener(new View.OnClickListener() {
+        backSpaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkPlus_Minus = true;
                 String lastSymbol;
-                String text = edtResult.getText().toString();
-                int len = edtResult.getText().toString().trim().length();
+                String text = resultEditText.getText().toString();
+                int len = resultEditText.getText().toString().trim().length();
                 if (len > 0) {
-                    lastSymbol = String.valueOf(edtResult.getText().toString().trim().charAt(len - 1));
+                    lastSymbol = String.valueOf(resultEditText.getText().toString().trim().charAt(len - 1));
                     text = text.substring(0, text.length() - 1);
-                    edtResult.setText(text);
-                    edtResult.setSelection(text.length());
+                    resultEditText.setText(text);
+                    resultEditText.setSelection(text.length());
 
                 }
 
@@ -329,8 +299,8 @@ public class Main3Activity extends AppCompatActivity {
 
 
     public void checkLastSymbol(String buttonName) {
-        int len = edtResult.getText().length();
-        String getText = edtResult.getText().toString().trim();
+        int len = resultEditText.getText().length();
+        String getText = resultEditText.getText().toString().trim();
         if (len > 0
                 && !String.valueOf(getText.charAt(len - 1)).equals("+")
                 && !String.valueOf(getText.charAt(len - 1)).equals("-")
@@ -338,18 +308,18 @@ public class Main3Activity extends AppCompatActivity {
                 && !String.valueOf(getText.charAt(len - 1)).equals(":")
                 && !getText.contains("=")) {
 
-            edtResult.append(buttonName);
+            resultEditText.append(buttonName);
 
         }
 
     }
 
     public void appendButtonName(String buttonName) {
-        String inputText = edtResult.getText().toString().trim();
+        String inputText = resultEditText.getText().toString().trim();
         int len = inputText.length();
         if (len == 0 || !inputText.contains("=") && (!inputText.endsWith("(") &&
                 !inputText.endsWith(")"))) {
-            edtResult.append(buttonName);
+            resultEditText.append(buttonName);
             checkPlus_Minus = true;
 
         }
@@ -358,7 +328,6 @@ public class Main3Activity extends AppCompatActivity {
 
     public void addOperationToList(String text) {
         // texti operationlara bolur ve  liste yigir
-        Log.e("calledMethod", "addOperationToList3");
         operation = new ArrayList<>();
         if (text.length() > 0) {
             for (int i = 0; i < text.length(); i++) {
@@ -422,7 +391,7 @@ public class Main3Activity extends AppCompatActivity {
             }
         }
         if (text.contains(":0")) {
-            edtResult.append("invalid operation");
+            resultEditText.append("invalid operation");
         } else {
             if (text.contains("(-")) {
                 text = text.replaceAll(Pattern.quote("(-"), "");
@@ -440,8 +409,6 @@ public class Main3Activity extends AppCompatActivity {
 
     public void addValueToList(String text) {
         // texti ededlere  bolur ve  liste yigir
-        Log.e("calledMethod", "addValueToList");
-        Log.e("text", text);
         String value = "";
         values = new ArrayList<>();
         operation = new ArrayList<>();
@@ -455,16 +422,12 @@ public class Main3Activity extends AppCompatActivity {
 
                 } else {
                     values.add(value);
-                    Log.e("valueAdd", value.toString());
                     value = "";
                     if (!String.valueOf(text.charAt(i)).equals("=")) {
                         operation.add(String.valueOf(text.charAt(i)));
                     }
-                    Log.e("value=", value);
-                    Log.e("operation=", String.valueOf(operation));
                 }
             }
-            Log.e("values", String.valueOf(values));
         }
     }
 
@@ -472,7 +435,6 @@ public class Main3Activity extends AppCompatActivity {
     public String calculateOnlyMultipyAndDivide(String text) {
         boolean checkNeqative = false;
         String resultCheck = "";
-        Log.e("calledMethod", "check");
         String op;
         double res = 0;
         Iterator<String> iterator = operation.iterator();
@@ -480,20 +442,17 @@ public class Main3Activity extends AppCompatActivity {
             for (int i = 0; i < values.size(); i++) {
                 if (values.get(i).contains(")")) {
                     values.set(i, convertToNegative(values.get(i)));
-                    Log.e("resValues", values.get(i));
                 }
             }
             op = String.valueOf(iterator.next());
             if (op.equals("*")) {
                 res = Double.parseDouble(values.get(0)) * Double.parseDouble(values.get(1));
-                Log.e("res*", String.valueOf(res));
                 values.remove(0);
                 values.remove(0);
                 values.add(0, String.valueOf(res));
 
             }
             if (op.equals(":")) {
-                Log.e("valueCalc:", values.get(0));
                 res = Double.parseDouble(values.get(0)) / Double.parseDouble(values.get(1));
                 Log.e("res/", String.valueOf(res));
                 values.remove(0);
@@ -501,26 +460,17 @@ public class Main3Activity extends AppCompatActivity {
                 values.add(0, String.valueOf(res));
             }
         }
-        Log.e("checkResult-", String.valueOf(res));
         resultCheck = String.valueOf(res);
         checkNeqative = checkNeqative(text);
-        Log.e("checkNeqative-", String.valueOf(checkNeqative));
-        Log.e("cheText-", text);
 
         if (!text.contains("+")) {
             if (!text.contains("-")) {
-                edtResult.append(resultCheck);
+                resultEditText.append(resultCheck);
             } else if (checkNeqative) {
-                Log.e("checkResultText-", text);
                 boolean chek = checkNeqative(text);
-                Log.e("chek", String.valueOf(checkNeqative));
-                edtResult.append(resultCheck);
+                resultEditText.append(resultCheck);
             }
-
-
         }
-
-
         return resultCheck;
 
     }
@@ -546,7 +496,6 @@ public class Main3Activity extends AppCompatActivity {
 
 
     public void calculateOnlySumAndSubtract() {
-        Log.e("calledMethod", "check");
         String op;
         double res = 0;
         for (int i = 0; i < splittedText.size(); i++) {
@@ -560,7 +509,6 @@ public class Main3Activity extends AppCompatActivity {
             if (!operation.equals("*") && !operation.equals(":")) {
                 if (op.equals("+")) {
                     res = Double.parseDouble(splittedText.get(0)) + Double.parseDouble(splittedText.get(1));
-                    Log.e("res+", String.valueOf(res));
                     splittedText.remove(0);
                     splittedText.remove(0);
                     splittedText.add(0, String.valueOf(res));
@@ -568,53 +516,14 @@ public class Main3Activity extends AppCompatActivity {
                 }
                 if (op.equals("-")) {
                     res = Double.parseDouble(splittedText.get(0)) - Double.parseDouble(splittedText.get(1));
-//                    Log.e("res-", String.valueOf(res));
                     splittedText.remove(0);
                     splittedText.remove(0);
                     splittedText.add(0, String.valueOf(res));
                 }
             }
         }
+        resultEditText.append(String.format("%.3f", res));
 
-        edtResult.append(String.format("%.3f", res));
-
-    }
-
-
-    public String getLastNumberFromText(String inputText) {
-        Log.e("called", "getLastNumberFromText");
-        int i = 1;
-        String result = "";
-        String lastSymbol = "";
-        int len = inputText.length();
-        if (len > 0) {
-            lastSymbol = String.valueOf(inputText.charAt(inputText.length() - 1));
-            while (!lastSymbol.equals("+") && !lastSymbol.equals("-") && !lastSymbol.equals("*") && !lastSymbol.equals(":")
-                    && !inputText.endsWith(".") && !lastSymbol.equals("=")) {
-                result = result.concat(lastSymbol);
-                i++;
-                lastSymbol = String.valueOf(inputText.charAt(inputText.length() - i));
-
-            }
-        }
-        return result;
-
-    }
-
-
-    public String inverseText(String lastSymbol) {
-        Log.e("called", "inverseText");
-
-        String textInverse = "";
-
-        for (int j = 1; j < lastSymbol.length() + 1; j++) {
-            textInverse = textInverse.concat(String.valueOf(lastSymbol.charAt(lastSymbol.length() - j)));
-            Log.e("logtextInverse", textInverse);
-
-
-        }
-
-        return textInverse;
     }
 
 
@@ -643,9 +552,6 @@ public class Main3Activity extends AppCompatActivity {
     public String reverseAndSet(String inputText) {
         String result = "";
         int len = inputText.length();
-        String reverseText = "";
-        int lenReverseText = 0;
-
         int i = 1;
         String lastSymbol2 = String.valueOf(inputText.charAt(len - 1));
         while (!lastSymbol2.equals("+") && !lastSymbol2.equals("-") &&
@@ -660,8 +566,6 @@ public class Main3Activity extends AppCompatActivity {
             }
 
         }
-
-
         return result;
     }
 
@@ -673,6 +577,30 @@ public class Main3Activity extends AppCompatActivity {
         value = value * factor;
         long tmp = Math.round(value);
         return (double) tmp / factor;
+    }
+
+    public void initViews() {
+        resultEditText = findViewById(R.id.result);
+        clearButton = findViewById(R.id.clear);
+        backSpaceButton = findViewById(R.id.backSpace);
+        divideButton = findViewById(R.id.divide);
+        multipyButton = findViewById(R.id.multipy);
+        minusButton = findViewById(R.id.minus);
+        plusButton = findViewById(R.id.plus);
+        pointButton = findViewById(R.id.point);
+        plus_minusButton = findViewById(R.id.plus_minus);
+        equalButton = findViewById(R.id.equal);
+        sevenButton = findViewById(R.id.seven);
+        eightButton = findViewById(R.id.eight);
+        nineButton = findViewById(R.id.nine);
+        fourButton = findViewById(R.id.four);
+        fiveButton = findViewById(R.id.five);
+        sixButton = findViewById(R.id.six);
+        threeButton = findViewById(R.id.three);
+        twoButton = findViewById(R.id.two);
+        oneButton = findViewById(R.id.one);
+        zeroButton = findViewById(R.id.zero);
+
     }
 }
 
